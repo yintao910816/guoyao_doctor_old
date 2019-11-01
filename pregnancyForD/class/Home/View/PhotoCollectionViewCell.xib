@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="PhotoCollectionViewCell" customModule="pregnancyForD" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="107" height="109"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="107" height="109"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="00E-yf-7L2">
+                        <rect key="frame" x="0.0" y="0.0" width="107" height="109"/>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Avu-De-h9j">
+                        <rect key="frame" x="82" y="5" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="WQM-uZ-Kr6"/>
+                            <constraint firstAttribute="width" constant="20" id="iHa-dT-PjI"/>
+                        </constraints>
+                        <state key="normal" image="HC-wei.png"/>
+                        <state key="selected" image="HC-xuan.png"/>
+                    </button>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="Avu-De-h9j" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="7fp-uC-FGI"/>
+                <constraint firstAttribute="trailing" secondItem="Avu-De-h9j" secondAttribute="trailing" constant="5" id="J0l-Cf-gge"/>
+                <constraint firstItem="00E-yf-7L2" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="SEf-1Y-eFf"/>
+                <constraint firstItem="00E-yf-7L2" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="VGR-je-W9X"/>
+                <constraint firstAttribute="bottom" secondItem="00E-yf-7L2" secondAttribute="bottom" id="gY9-VK-vPf"/>
+                <constraint firstAttribute="trailing" secondItem="00E-yf-7L2" secondAttribute="trailing" id="h4s-2F-nlx"/>
+            </constraints>
+            <size key="customSize" width="107" height="109"/>
+            <connections>
+                <outlet property="photoImageView" destination="00E-yf-7L2" id="M3O-id-iuf"/>
+                <outlet property="selectBtn" destination="Avu-De-h9j" id="kBD-6a-Sh9"/>
+            </connections>
+            <point key="canvasLocation" x="62.5" y="135.5"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="HC-wei.png" width="25" height="25"/>
+        <image name="HC-xuan.png" width="25" height="25"/>
+    </resources>
+</document>

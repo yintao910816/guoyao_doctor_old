@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.14"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="PatientDetailTableViewCell" customModule="pregnancyForD" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j06-ov-tKH">
+                        <rect key="frame" x="28" y="11.5" width="35" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qYa-JA-HgL">
+                        <rect key="frame" x="239" y="6" width="51" height="31"/>
+                    </switch>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="分组信息" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bCZ-Xm-mWy">
+                        <rect key="frame" x="168" y="9.5" width="120" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="120" id="HPg-nv-MVe"/>
+                            <constraint firstAttribute="height" constant="25" id="zuG-Xb-nqw"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HC-you.png" translatesAutoresizingMaskIntoConstraints="NO" id="noq-G1-Kgx">
+                        <rect key="frame" x="298" y="15.5" width="7" height="13"/>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="noq-G1-Kgx" firstAttribute="leading" secondItem="qYa-JA-HgL" secondAttribute="trailing" constant="10" id="3B6-hy-MBl"/>
+                    <constraint firstItem="j06-ov-tKH" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="4h9-rL-3O7"/>
+                    <constraint firstItem="qYa-JA-HgL" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="G7z-7o-ynB"/>
+                    <constraint firstItem="bCZ-Xm-mWy" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Gpl-ve-Laq"/>
+                    <constraint firstItem="noq-G1-Kgx" firstAttribute="leading" secondItem="bCZ-Xm-mWy" secondAttribute="trailing" constant="10" id="Hhg-mX-GT9"/>
+                    <constraint firstItem="noq-G1-Kgx" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="OoG-jG-67B"/>
+                    <constraint firstItem="j06-ov-tKH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="qrf-D4-dgG"/>
+                    <constraint firstAttribute="trailing" secondItem="noq-G1-Kgx" secondAttribute="trailing" constant="15" id="wdp-GU-G7I"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="HCswitch" destination="qYa-JA-HgL" id="uSt-3P-yBK"/>
+                <outlet property="patientDetailContent" destination="bCZ-Xm-mWy" id="Znc-vQ-F6M"/>
+                <outlet property="patientDetailTitle" destination="j06-ov-tKH" id="yyJ-Yb-UCv"/>
+                <outlet property="patientYou" destination="noq-G1-Kgx" id="iYP-4i-J2t"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="HC-you.png" width="7" height="13"/>
+    </resources>
+</document>
