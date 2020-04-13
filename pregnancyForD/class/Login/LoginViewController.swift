@@ -53,12 +53,15 @@ class LoginViewController: UIViewController {
     func initLoginV(){
         self.view.addSubview(containerV)
         
+        aileyunImgV.layer.cornerRadius = 8
+        aileyunImgV.clipsToBounds = true
         containerV.addSubview(aileyunImgV)
         aileyunImgV.snp.updateConstraints { (make) in
-            make.left.right.top.equalTo(containerV)
-            make.height.equalTo(80)
+            make.top.equalTo(containerV)
+            make.centerX.equalTo(containerV.snp.centerX)
+            make.height.width.equalTo(80)
         }
-        aileyunImgV.contentMode = .scaleAspectFit
+//        aileyunImgV.contentMode = .scaleAspectFit
         
         let headL = UILabel()
         containerV.addSubview(headL)
@@ -258,10 +261,10 @@ extension LoginViewController : UITextFieldDelegate {
     
     
     @objc func startCount(){
-        guard checkIsPhone(self.cellphoneTF.text!) else{
-            HCShowError(info: "请输入正确的手机号码！")
-            return
-        }
+//        guard checkIsPhone(self.cellphoneTF.text!) else{
+//            HCShowError(info: "请输入正确的手机号码！")
+//            return
+//        }
         SVProgressHUD.show(withStatus: "获取中...")
         HttpRequestManager.shareIntance.SendSms(self.cellphoneTF.text!) { [weak self](success, message) in
             SVProgressHUD.dismiss()
