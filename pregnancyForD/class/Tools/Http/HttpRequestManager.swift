@@ -606,10 +606,10 @@ class HttpRequestManager {
     }
     
     
-    // 获取咨询列表
-    func HC_getConsultList(_ token : String, pageNum : NSInteger, pageSize : NSInteger, callback : @escaping (_ success : Bool, _ ModelArray : [ConsultModel]?, _ hasNext : Bool, _ message : String)->()) -> () {
+    // 获取咨询列表 currentStatus - 0：未回复 1：已回复
+    func HC_getConsultList(_ token : String, pageNum : NSInteger, pageSize : NSInteger, currentStatus: Int, callback : @escaping (_ success : Bool, _ ModelArray : [ConsultModel]?, _ hasNext : Bool, _ message : String)->()) -> () {
         
-        let dic = NSDictionary.init(dictionary: ["token" : token, "pageNum" : pageNum, "pageSize" : pageSize])
+        let dic = NSDictionary.init(dictionary: ["token" : token, "pageNum" : pageNum, "pageSize" : pageSize, "currentStatus": currentStatus])
         HttpClient.shareIntance.POST(HC_CONSULT_LIST, parameters: dic) { (result, ccb) in
             
 //            HCPrint(message: result)
@@ -621,7 +621,7 @@ class HttpRequestManager {
                 let tempArray = dic["list"] as! [Any]
                 
                 guard tempArray.count >= 1 else{
-                    callback(false, nil, false, ccb.message)
+                    callback(false, nil, false, "没有数据")
                     return
                 }
                 

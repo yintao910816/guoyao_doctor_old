@@ -118,6 +118,7 @@
 		3CD234CE202AAE300004F889 /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD234CD202AAE300004F889 /* NotificationModel.swift */; };
 		3CD234D0202ADA240004F889 /* HCNoticeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD234CF202ADA240004F889 /* HCNoticeTableViewCell.swift */; };
 		7F6CFCCA22691A517B9CA128 /* Pods_pregnancyForD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F622DDE30CC886B998F72AB0 /* Pods_pregnancyForD.framework */; };
+		B8FE94552463E2F300E5C3AE /* ConsultMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FE94542463E2F300E5C3AE /* ConsultMenuView.swift */; };
 		CF035E4C1EC5A26A000B488D /* jieshou@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF035E4A1EC5A26A000B488D /* jieshou@2x.png */; };
 		CF035E4D1EC5A26A000B488D /* jieshou@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF035E4B1EC5A26A000B488D /* jieshou@3x.png */; };
 		CF035E4F1EC5BC77000B488D /* GroupManagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF035E4E1EC5BC77000B488D /* GroupManagerController.swift */; };
@@ -372,6 +373,7 @@
 		3CD234CD202AAE300004F889 /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
 		3CD234CF202ADA240004F889 /* HCNoticeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HCNoticeTableViewCell.swift; sourceTree = "<group>"; };
 		89526C5F456339D5BB08E271 /* Pods-pregnancyForD.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pregnancyForD.debug.xcconfig"; path = "Pods/Target Support Files/Pods-pregnancyForD/Pods-pregnancyForD.debug.xcconfig"; sourceTree = "<group>"; };
+		B8FE94542463E2F300E5C3AE /* ConsultMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsultMenuView.swift; sourceTree = "<group>"; };
 		CF035E4A1EC5A26A000B488D /* jieshou@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jieshou@2x.png"; sourceTree = "<group>"; };
 		CF035E4B1EC5A26A000B488D /* jieshou@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jieshou@3x.png"; sourceTree = "<group>"; };
 		CF035E4E1EC5BC77000B488D /* GroupManagerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupManagerController.swift; sourceTree = "<group>"; };
@@ -864,8 +866,9 @@
 				CFCE2BCD1ECE91C10098DE2E /* ConfirmVoiceView.swift */,
 				CF195A0D1EB6297900B5E814 /* PhotoPickerButton.swift */,
 				CF14BB5B1EA70F2A004D0110 /* PatientDetailView.swift */,
-				CF03925C1ED2896900DE489C /* AudioButton.swift */,
 				CFA712201EAA057000D19B5B /* TemplateTableViewCell.swift */,
+				CF03925C1ED2896900DE489C /* AudioButton.swift */,
+				B8FE94542463E2F300E5C3AE /* ConsultMenuView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1575,6 +1578,7 @@
 				3C84BA0E20046B5500A3F6FD /* HomeFunctionModule.swift in Sources */,
 				CF84D9761EADCE240001697B /* UserModel.swift in Sources */,
 				CFF7BE9A1EC2F26700499ADD /* EdgeLabel.swift in Sources */,
+				B8FE94552463E2F300E5C3AE /* ConsultMenuView.swift in Sources */,
 				CFAFD54D1EC041FC00346A99 /* ShowPhotoViewController.swift in Sources */,
 				3C5FF5781FBBE99D00403FFA /* TestViewController.swift in Sources */,
 				3C3FDCCE1F986E1000EB9F26 /* BaseChatTableViewCell.swift in Sources */,
@@ -1710,7 +1714,7 @@
 					"$(PROJECT_DIR)/pregnancyForD/lib/VoiceConvert/lib",
 					"$(PROJECT_DIR)/pregnancyForD/lib/weixin",
 				);
-				MARKETING_VERSION = 2.1.001;
+				MARKETING_VERSION = 2.1.002;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1779,7 +1783,7 @@
 					"$(PROJECT_DIR)/pregnancyForD/lib/VoiceConvert/lib",
 					"$(PROJECT_DIR)/pregnancyForD/lib/weixin",
 				);
-				MARKETING_VERSION = 2.1.001;
+				MARKETING_VERSION = 2.1.002;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

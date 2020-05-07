@@ -11,14 +11,56 @@ import SDWebImage
 import MJRefresh
 import SVProgressHUD
 
-class HomeTableViewController: BaseTableViewController {
+class HomeTableViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
 
     let reuseIdentifier = "reuseIdentifier"
+     
+    private var dataType: ConsultMenuAction = .unReply
+    private var sourceData: [ConsultMenuAction: [ConsultModel]] = [:]
     
-    var consultArray : [ConsultModel]? {
-        didSet {
-            self.tableView.reloadData()
+    private lazy var menuView: ConsultMenuView = {
+        let view = ConsultMenuView.init(frame: .init(x: 0, y: 0, width: self.view.bounds.size.width, height: 40))
+        view.changeCallBack = { [weak self] type in
+            guard let strongSelf = self else { return }
+            if type != strongSelf.dataType {
+                strongSelf.dataType = type
+                if strongSelf.currentData().count > 0 {
+                    strongSelf.tableView.reloadData()
+                }else {
+                    strongSelf.loadNewData()
+                }
+            }
         }
+        return view
+    }()
+    
+    private lazy var tableView: UITableView = {
+        let tab = UITableView.init(frame: .init(x: 0, y: 40, width: self.view.bounds.size.width, height: self.view.bounds.size.height - 40))
+        tab.separatorInset = UIEdgeInsets.init(top: 0, left: 60, bottom: 0, right: 0)
+        tab.delegate = self
+        tab.dataSource = self
+        tab.register(HomeTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tab.tableFooterView = UIView()
+        return tab
+    }()
+        
+    private func updateData(newData: [ConsultModel]) {
+        let current: [ConsultModel] = currentData()
+        if current.count > 0 {
+            sourceData[dataType] = current + newData
+        }else{
+            sourceData[dataType] = newData
+        }
+        
+        tableView.reloadData()
+    }
+    
+    private func currentData() ->[ConsultModel] {
+        return sourceData[dataType] ?? [ConsultModel]()
+    }
+    
+    private func resetSourceData() {
+       sourceData[dataType] = []
     }
     
     var hasNext : Bool = true
@@ -34,8 +76,12 @@ class HomeTableViewController: BaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "消息"
-        
-        self.tableView.register(HomeTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+                
+        sourceData[.unReply] = [ConsultModel]()
+        sourceData[.reply] = [ConsultModel]()
+
+        view.addSubview(menuView)
+        view.addSubview(tableView)
         
         let headerV = MJRefreshNormalHeader.init(refreshingTarget: self, refreshingAction: #selector(HomeTableViewController.loadNewData))
         headerV?.setTitle("下拉刷新", for: .idle)
@@ -51,9 +97,7 @@ class HomeTableViewController: BaseTableViewController {
         footerV?.setTitle("拖动请求数据", for: .idle)
         footerV?.setTitle("已加载全部数据", for: .noMoreData)
         tableView.mj_footer = footerV
-        
-        tableView.separatorInset = UIEdgeInsets.init(top: 0, left: 60, bottom: 0, right: 0)
-        
+                
         NotificationCenter.default.addObserver(self, selector: #selector(HomeTableViewController.loadNewData), name: NSNotification.Name.init(ReplyConsultSuccess), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(HomeTableViewController.loadNewData), name: NSNotification.Name.init(RejectConsultSuccess), object: nil)
         
@@ -72,29 +116,29 @@ class HomeTableViewController: BaseTableViewController {
     
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return consultArray?.count ?? 0
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return currentData().count
     }
 
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! HomeTableViewCell
-        cell.consultModel = consultArray?[indexPath.row]
+        cell.consultModel = currentData()[indexPath.row]
         return cell
     }
   
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let testVC = TestViewController()
-        testVC.patientId = consultArray?[indexPath.row].patientId
-        testVC.doctorId = consultArray?[indexPath.row].doctorId
-        testVC.identityNo = consultArray?[indexPath.row].identityNo
+        testVC.patientId = currentData()[indexPath.row].patientId
+        testVC.doctorId = currentData()[indexPath.row].doctorId
+        testVC.identityNo = currentData()[indexPath.row].identityNo
         self.navigationController?.pushViewController(testVC, animated: true)
     }
 }
@@ -103,7 +147,7 @@ extension HomeTableViewController{
     @objc func loadNewData(){
         pageNo = 1
         hasNext = true
-        consultArray = nil
+        resetSourceData()
         
         tableView.mj_header.endRefreshing()
         requestData()
@@ -121,19 +165,16 @@ extension HomeTableViewController{
         }
         
         SVProgressHUD.show()
-        HttpRequestManager.shareIntance.HC_getConsultList((UserManager.shareIntance.currentUser?.token)!, pageNum: pageNo, pageSize: 10) { [weak self](success, arr, hasNext, msg) in
+        HttpRequestManager.shareIntance.HC_getConsultList((UserManager.shareIntance.currentUser?.token)!, pageNum: pageNo, pageSize: 10, currentStatus: dataType.rawValue) { [weak self](success, arr, hasNext, msg) in
             if success == true {
 //                self?.updateBadgenumber()
                 self?.pageNo += 1
                 self?.hasNext = hasNext
-                if let preArr = self?.consultArray {
-                    let totalArr = preArr + arr!
-                    self?.consultArray = totalArr
-                }else{
-                    self?.consultArray = arr
-                }
+                
+                self?.updateData(newData: arr ?? [ConsultModel]())
                 SVProgressHUD.dismiss()
             }else{
+                self?.updateData(newData: [ConsultModel]())
                 HCShowError(info: msg)
             }
         }
